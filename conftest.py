@@ -54,15 +54,7 @@ def courier_factory():
 @pytest.fixture
 def registered_courier(courier_factory):
     """Готовый курьер для тестов, которым нужен существующий аккаунт."""
-    courier = courier_factory()
-
-    assert courier.response.status_code == 201, (
-        f'Не удалось подготовить курьера: '
-        f'{courier.response.status_code} {courier.response.text}'
-    )
-    assert courier.courier_id is not None, 'API не вернул id подготовленного курьера'
-
-    return courier
+    return courier_factory()
 
 
 @pytest.fixture

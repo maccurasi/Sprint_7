@@ -11,7 +11,7 @@ class TestCreateOrder:
 
     @allure.title('Заказ создаётся с вариантом цвета: {case_name}')
     @pytest.mark.parametrize(
-        ('case_name', 'colours'),
+        ('case_name', 'colour_payload'),
         TestData.ORDER_COLOURS,
         ids=[case[0] for case in TestData.ORDER_COLOURS],
     )
@@ -19,13 +19,9 @@ class TestCreateOrder:
         self,
         order_factory,
         case_name,
-        colours,
+        colour_payload,
     ):
-        payload = build_order_data()
-        if colours is not None:
-            payload['color'] = colours
-
-        order = order_factory(payload)
+        order = order_factory({**build_order_data(), **colour_payload})
 
         assert order.response.status_code == 201
         assert isinstance(order.response.json().get('track'), int)

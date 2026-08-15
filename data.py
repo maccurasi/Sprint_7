@@ -28,11 +28,13 @@ class TestData:
 
     REQUIRED_LOGIN_FIELDS = ("login",)
 
+    # Готовые фрагменты тела запроса: вариант «без цвета» — это пустой словарь,
+    # поэтому тесту не нужны условия при сборке payload.
     ORDER_COLOURS = (
-        ("black", ["BLACK"]),
-        ("grey", ["GREY"]),
-        ("black_and_grey", ["BLACK", "GREY"]),
-        ("without_colour", None),
+        ("black", {"color": ["BLACK"]}),
+        ("grey", {"color": ["GREY"]}),
+        ("black_and_grey", {"color": ["BLACK", "GREY"]}),
+        ("without_colour", {}),
     )
 
     ORDERS_LIST_PARAMS = {"limit": 5, "page": 0}
